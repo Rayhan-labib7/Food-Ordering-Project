@@ -25,7 +25,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     private String fullName;
 
@@ -33,7 +33,7 @@ public class User {
 
     private String password;
      
-    private USER_ROLE role;
+    private USER_ROLE role=USER_ROLE.ROLE_CUSTOMER;
     
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "customer")
