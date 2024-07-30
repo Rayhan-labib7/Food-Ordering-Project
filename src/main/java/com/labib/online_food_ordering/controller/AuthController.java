@@ -71,8 +71,7 @@ public class AuthController {
        SecurityContextHolder.getContext().setAuthentication(authentication);
 
        String jwt=jwtProvider.generateToken(authentication);
-       System.out.println(jwt);
-
+ 
        AuthResponse authResponse = new AuthResponse();
        authResponse.setJwt(jwt);
        authResponse.setMessage("Register success");
@@ -95,7 +94,7 @@ public class AuthController {
 
       AuthResponse authResponse = new AuthResponse();
       authResponse.setJwt(jwt);
-      authResponse.setMessage("Register success");
+      authResponse.setMessage("sigin success");
       
        authResponse.setRole(USER_ROLE.valueOf(role));
 
