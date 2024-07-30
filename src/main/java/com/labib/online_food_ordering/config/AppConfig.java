@@ -24,13 +24,15 @@ public class AppConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                 .addFilterAfter(new JwtTokenValidator(), BasicAuthenticationFilter.class)
-                 .authorizeHttpRequests(authorize -> authorize
-                    // Temporarily permit all requests for debugging
-                    .anyRequest().permitAll()
-                 )
-                .csrf(csrf -> csrf.disable());
-                // .cors(cors -> cors.configurationSource(corsConfigurationSource()));
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/api/admin/**").hasAnyRole("RESTAURANT_OWNER","ADMIN")
+                        .requestMatchers("/api/**").authenticated()
+                        .requestMatchers("/auth/signin", "/auth/signup").permitAll()
+                        .anyRequest().permitAll()
+                )
+                .addFilterBefore(new JwtTokenValidator(), BasicAuthenticationFilter.class)
+                .csrf(csrf -> csrf.disable())
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()));
 
         return http.build();
     }
