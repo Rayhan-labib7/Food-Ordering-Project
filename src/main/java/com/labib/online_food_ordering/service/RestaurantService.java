@@ -2,22 +2,25 @@ package com.labib.online_food_ordering.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.labib.online_food_ordering.dto.RestaurantDto;
 import com.labib.online_food_ordering.model.Restaurant;
 import com.labib.online_food_ordering.model.User;
 import com.labib.online_food_ordering.request.CreateRestaurantRequest;
 
+@Service
 public interface RestaurantService {
 
    public Restaurant createRestaurant(CreateRestaurantRequest req,User user);
 
-   public Restaurant updateRestaurant(Long restaurantId,CreateRestaurantRequest updatedRestaurant) throws Exception;
+   public Restaurant updatedRestaurant(Long restaurantId,CreateRestaurantRequest updatedRestaurant) throws Exception;
 
    public void deleteRestautant(Long restaurantId) throws Exception;
 
    public List<Restaurant>getAllRestaurant();
  
-   public List<Restaurant>searchRestaurant();
+   public List<Restaurant>searchRestaurant(String keyword);
 
    public Restaurant findRestaurantById(Long id) throws Exception;
    
